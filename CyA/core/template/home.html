@@ -1,0 +1,67 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('.slider').bxSlider({
+          mode: 'fade',//horizontal, vertical, fade
+          auto: true,
+          pause: 5000
+
+      });
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+
+{% endblock %}
+
+
+{% block contenido %}
+
+<div class="slider">
+    <div>
+        <img src="{% static 'app/img/banner/banner_sale.gif' %}" alt="">
+    </div>
+    <div>
+        <img src="{% static 'app/img/banner/banner1.jpg' %}" alt="">
+    </div>
+    <div>
+        <img src="{% static 'app/img/banner/banner2.jpg' %}" alt="">
+    </div>
+    <div>
+        <img src="{% static 'app/img/banner/banner3.jpg' %}" alt="">
+    </div>
+</div>
+{% load humanize %}
+<h3 >Productos</h3>
+<div class="productos">
+    {% for p in productos %}
+    <div class="producto">
+
+        <div class="contenedor_producto">
+            {% if p.imagen %}
+            <img src="{{ p.imagen.url }}" alt="imagen producto">
+            {% endif %}
+            <div class="detalle">
+                <h5>{{p.marca | capfirst}}</h5>
+                <h2>{{p.nombre | title}}</h2>
+                <h4>${{p.precio | intcomma}}</h4>
+                <hr>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input type="submit" value="Comprar" class="btn btn-primary">
+            </div> 
+        </div>
+        <br><br>
+</div>
+    {% endfor %}
+</div>
+
+{% endblock %}
